@@ -1,0 +1,76 @@
+//c版基数排序LSD
+#include<math.h>
+#include<stdio.h>
+int maxelem(int n,int p[])
+{
+    int max;
+    max=-1111;
+    for(int i=0;i<n;i++)
+       if(p[i]>max)
+        max=p[i];
+     return max;
+}
+int maxlength(int x)
+{
+     int cou;
+     cou=0;
+     while(x)
+     {
+         cou++;
+         x=x/10;
+     }
+     return cou;
+
+}
+void bucketsort2(int e,int p[],int n)
+{
+    int tong[10][30]={};
+    int tempnum=(int)pow(10,e);
+    for(int i=0;i<n;i++)// 选桶
+    {
+        int tempwei=(p[i]/tempnum)%10;
+        for(int j=0;j<30;j++)
+        {
+            if(tong[tempwei][j]==NULL)
+            {
+                tong[tempwei][j]=p[i];
+                break;
+            }
+        }
+    }
+    int k=0;
+    for(int i=0;i<10;i++)//将桶中的数，倒回到原有数组中
+    {
+        for(int j=0;j<30;j++)
+        {
+            if(tong[i][j]!=NULL)
+            {
+                p[k++]=tong[i][j];
+                tong[i][j]=NULL;
+            }
+        }
+    }
+
+
+}
+void bucketsort(int p[],int n)//基数排序
+{
+    int Largest;
+    int length;
+    Largest=maxelem(n,p);
+    length=maxlength(Largest);
+    for(int i=0;i<length;i++)
+      bucketsort2(i,p,n);
+
+}
+
+int main()
+{
+    int a[]={2,343,342,1,123,43,4343,433,687,654,3};
+    int size=sizeof(a)/sizeof(int);
+    bucketsort(a,size);
+    int i;
+    for(i=0;i<size;i++)
+        printf("%d\n",a[i]);
+    return 0;
+}
