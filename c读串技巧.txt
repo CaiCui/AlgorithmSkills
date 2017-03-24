@@ -1,0 +1,25 @@
+scanf( )函数和gets( )函数都可用于输入字符串，但在功能上有区别。
+
+gets可以接收空格
+scanf遇到空格、回车和Tab键都会认为输入结束，所有它不能接收空格。
+
+例1：
+#include <stdio.h>
+main()
+{
+    char ch1[10],ch2[10];
+    scanf("%s",ch1);
+    gets(ch2);
+}
+// 依次键入asd空格fg回车，asd空格fg回车，则ch1="asd\0"，ch2="asd fg\0"。
+例2：
+#include <stdio.h>
+main()
+{
+char ch1[10],ch2[10],c1,c2;
+scanf("%s",ch1);
+c1=getchar();
+gets(ch2);
+c2=getchar();
+}
+// 依次键入asdfg回车，asdfg回车，则ch1="asdfg\0"，c1='\n'，ch2="asdfg\0"，c2需输入。

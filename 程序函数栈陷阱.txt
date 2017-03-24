@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+/* 程序栈原因 i,a[10]均为函数内栈存储，所以i=10时，相当于a[10]越界到了i的位置，使i变为了0所以无限循环
+i  a[10]
+a[9]
+a[8]
+a[7]
+a[6]
+a[5]
+a[4]
+a[3]
+a[2]
+a[1]
+a[0]
+*/
+int main()
+{
+    int i;
+    int a[10];;
+    for(i=1;i<=10;i++)
+    {
+        cout<<"hi";
+        a[i]=0;
+    }
+    return 0;
+}
+//输出很多"hi"，原因在上图

@@ -1,0 +1,44 @@
+1.求最大公约数
+1>.暴力 直接从a,b中较小的一个数开始倒着枚举最大公约数
+2>.辗转相除法:
+int gcd(int a,int b)//a,b无大小顺序，因为不影响，通过取余会自己交换
+{
+   if(b==0)return a;
+   return gcd(b,a%b);
+}
+
+(a+b)%c==(a%c+b%c)%c
+
+2.最小公倍数q
+q=(a*b)/最大公约数
+
+3.a的n次幂，对p取模
+(a*b)%p==(a%p)*(b%p)%p
+
+4.第x个素数问题(x非常大)
+筛法(剔除质数的倍数，和数跳过)
+#define N 1000000
+int a[N]={0};
+void solve(int x)
+{
+   for(int i=2;i<N/2;i++)
+  {
+      if(a[i]==1) continue;//和数筛掉
+    for(int k=2;k*i<=N;k++)
+      if(i*k<N)
+        a[i*k]=1;
+   }
+   int m=0;
+  for(int i=2;i<N;i++)
+  {
+     if(a[i]==0)
+    {
+     m++;
+     if(m==x) cout<<i<<endl;
+     }
+   }
+}
+
+5.买糖果题目（很好的思路：暴力枚举+求第一次出现的连续序列）
+
+6.Nim博弈
